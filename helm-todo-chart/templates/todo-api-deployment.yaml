@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-api-deployment
+spec:
+  replicas: {{ .Values.todoApi.replicas }}
+  selector:
+    matchLabels:
+      app: todo-api
+  template:
+    metadata:
+      labels:
+        app: todo-api
+    spec:
+      containers:
+        - name: todo-api
+          image: {{ .Values.todoApi.image }}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: {{ .Values.todoApi.port }}
+          env:
+            - name: REDIS_HOST
+              value: "redis-service"
+            - name: REDIS_PORT
+              value: "{{ .Values.redis.port }}"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.todoApi.port }}
+            initialDelaySeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.todoApi.port }}
+            initialDelaySeconds: 10
