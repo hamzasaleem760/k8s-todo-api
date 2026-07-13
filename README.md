@@ -98,22 +98,4 @@ helm uninstall todo-release
 minikube stop
 minikube delete
 ```
-
-## What this demonstrates (for your CV / interview talking points)
-
-- **Deployments**: replica management, resource requests/limits, readiness
-  and liveness probes for the API pods.
-- **Services**: internal ClusterIP service discovery (`todo-api-service` ->
-  `redis-service` via DNS name, no hardcoded IPs).
-- **Ingress**: routing external HTTP traffic into the cluster via an
-  nginx ingress controller.
-- **Helm**: templating the same manifests with `values.yaml` so
-  replica counts, images, and hostnames are configurable per environment.
-
-## Suggested CV bullet once you've run this yourself
-
-> Deployed a containerized Node.js/Redis application on a local Kubernetes
-> cluster (minikube), configuring Deployments with health probes, ClusterIP
-> Services for internal discovery, and Ingress for external routing;
-> templated the deployment with a custom Helm chart for environment-based
 > configuration.
