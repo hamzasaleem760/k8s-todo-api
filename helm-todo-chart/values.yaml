@@ -1,0 +1,12 @@
+todoApi:
+  image: todo-api:local
+  replicas: 2
+  port: 3000
+
+redis:
+  image: redis:7-alpine
+  port: 6379
+
+ingress:
+  enabled: true
+  host: todo.local
